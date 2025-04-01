@@ -1,0 +1,325 @@
+<DOCTYPE html>  <html lang="en">  
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu Delicious Bites</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="auth.js"></script> <!-- Authentication UI logic -->
+</head>
+
+<body>
+  <header class="header">
+    <div class="header-container">
+      <h1 class="logo">Delicious Bites</h1>
+      
+      <!-- Authentication Buttons (Right Side) -->
+      <div id="authContainer">
+        <div id="authButtons">
+          <button id="loginButton" class="auth-btn">Login</button>
+          <button id="registerButton" class="auth-btn register-btn">Register</button>
+        </div>
+        
+        <!-- Profile Icon & Logout Dropdown -->
+        <div id="profileContainer" class="profile-container" style="display: none;">
+          <div id="profileIcon" class="profile-icon">⚙️</div>
+          <div id="logoutDropdown" class="logout-dropdown">
+            <button id="logoutButton">Logout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <nav class="nav">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <section id="menu" class="menu">
+    <h2>Our Menu</h2>
+    <div class="food-container">
+      <div class="food-item">
+        <img src="images/tunapie.jpeg" alt="Tuna Pie">
+        <h3>Tuna Pie</h3>
+        <p>₱20.00</p>
+        <button class="order-btn" onclick="openOrderPopup('Tuna Pie', 20)">Order Now</button>
+      </div>
+      <div class="food-item">
+        <img src="images/calamansijuice.jpeg" alt="Calamansi Juice">
+        <h3>Calamansi Juice</h3>
+        <p>₱10.00</p>
+        <button class="order-btn" onclick="openOrderPopup('Calamansi Juice', 10)">Order Now</button>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Order Popup -->
+  <div id="orderPopup" class="popup" style="display: none;">
+    <div class="popup-content">
+      <span class="close-btn" onclick="closeOrderPopup()">&times;</span>
+      <h2>Order Now</h2>
+      <p id="selectedItem"></p>
+      
+      <form id="orderForm" onsubmit="sendOrder(); return false;">
+        <div class="order-section">
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+        </div>
+        
+        <div class="customer-section">
+          <label for="customerName">Your Name:</label>
+          <input type="text" id="customerName" name="customerName" placeholder="Enter your name" required>
+        </div>
+        
+        <label for="customerEmail">Your Email:</label>
+        <input type="email" id="customerEmail" name="customerEmail" placeholder="Enter your email" required>
+        
+        <label for="customerPhone">Phone Number:</label>
+        <input type="tel" id="customerPhone" name="customerPhone" 
+       pattern="^09\d{9}$" 
+       placeholder="09XXXXXXXXX" 
+       maxlength="11" 
+       oninput="this.value = this.value.replace(/\D/g, '').slice(0, 11);" 
+       required>
+        
+        <label for="deliveryLocation">Delivery Address:</label>
+        <input type="text" id="deliveryLocation" name="deliveryLocation" placeholder="Enter your address" required>
+        
+        <p id="errorMessage" style="color: red; display: none;"></p>
+        
+        <button type="submit">Confirm Order</button>
+      </form>
+    </div>
+  </div>
+  
+  <footer>
+    <p>&copy; 2025 Delicious Bites. All Rights Reserved.</p>
+  </footer>
+  
+  <!-- Load EmailJS before order.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  
+  <!-- External Order Script -->
+  <script type="module" src="order.js"></script>
+  
+    <script type="module">
+      import { auth } from "/firebase.js";
+      import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+      
+      document.addEventListener("DOMContentLoaded", function() {
+  const profileIcon = document.getElementById("profileIcon");
+  const logoutDropdown = document.getElementById("logoutDropdown");
+  let rotationAngle = 0;
+  
+  profileIcon.addEventListener("click", function() {
+    rotationAngle += 180; // Increase rotation by 180 degrees per click
+    profileIcon.style.transform = `rotate(${rotationAngle}deg) scale(1.1)`;
+    
+    // Toggle the logout dropdown
+    logoutDropdown.classList.toggle("show");
+  });
+        
+        document.addEventListener("click", function(event) {
+          if (!profileIcon.contains(event.target) && !logoutDropdown.contains(event.target)) {
+            logoutDropdown.classList.remove("show");
+          }
+        });
+        
+        // Check authentication state
+        onAuthStateChanged(auth, (user) => {
+          const authButtons = document.getElementById("authButtons");
+          const profileContainer = document.getElementById("profileContainer");
+          
+          if (user) {
+            authButtons.style.display = "none";
+            profileContainer.style.display = "flex";
+          } else {
+            authButtons.style.display = "flex";
+            profileContainer.style.display = "none";
+          }
+        });
+        
+        // Logout function
+        logoutButton.addEventListener("click", () => {
+          signOut(auth)
+            .then(() => {
+              alert("Successfully logged out!");
+              location.reload(); // 
+            })
+            .catch((error) => {
+              console.error("Logout Error:", error);
+            });
+        });
+        
+        // Login and Register button event listeners
+        loginButton.addEventListener("click", () => {
+          window.location.href = "login.html";
+        });
+        
+        registerButton.addEventListener("click", () => {
+          window.location.href = "register.html";
+        });
+      });
+    </script>
+    
+    <style>
+      /* General Styling */
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #fff0e6;
+      }
+      
+      /* Header */
+      .header {
+        background: linear-gradient(135deg, #ff5733, #ff4500);
+        padding: 15px 0;
+        color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: relative;
+      }
+      
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+      }
+      
+      .logo {
+        font-size: 26px;
+        font-weight: bold;
+      }
+      
+      /* Authentication Container */
+      #authContainer {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      
+      /* Login & Register Buttons */
+      .auth-btn {
+        background: white;
+        color: #ff5733;
+        padding: 10px 18px;
+        border-radius: 25px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      
+      .auth-btn:hover {
+        background: #ff5733;
+        color: white;
+        transform: scale(1.05);
+      }
+      
+      .register-btn {
+        background: white;
+        color: #ff8c1a;
+      }
+      
+      .register-btn:hover {
+        background: #ff8c1a;
+        color: white;
+      }
+      
+      /* Profile Icon (Gear) */
+      .profile-icon {
+        width: 50px;
+        height: 50px;
+        background: white;
+        color: #ff5733;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 22px;
+        font-weight: bold;
+        border: 3px solid #ff5733;
+        transition: all 0.3s ease-in-out;
+        position: relative;
+      }
+      
+      /* Logout Dropdown */
+      .logout-dropdown {
+        display: none;
+        position: absolute;
+        top: 55px;
+        right: 0;
+        background: white;
+        border-radius: 10px;
+        padding: 12px;
+        min-width: 150px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+      
+      /* Show Logout Dropdown */
+      .logout-dropdown.show {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      /* Stylish Logout Button */
+      #logoutButton {
+        background: linear-gradient(135deg, #ff5733, #ff4500);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 12px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 50px;
+        width: 100%;
+        text-align: center;
+        transition: all 0.3s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+      
+      /* Gear Icon on Logout Button */
+      #logoutButton::before {
+        content: "⚙️";
+        font-size: 18px;
+      }
+      
+      /* Hover Effect */
+      #logoutButton:hover {
+        background: linear-gradient(135deg, #ff4500, #e03e00);
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+      
+      /* Responsive for Mobile */
+      @media (max-width: 480px) {
+        .profile-icon {
+          width: 40px;
+          height: 40px;
+          font-size: 18px;
+        }
+        
+        .logout-dropdown {
+          min-width: 130px;
+        }
+        
+        #logoutButton {
+          font-size: 14px;
+          padding: 10px 15px;
+        }
+      }
+      l

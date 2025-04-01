@@ -1,0 +1,380 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #f0f8ff, #ffcc00);
+    color: #333;
+}
+
+/* Header Styles */
+header {
+    background: linear-gradient(45deg, #ff6347, #ff4500, #ff8c00);
+    color: white;
+    padding: 30px 0;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    font-size: 4em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+/* Navigation Bar */
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    margin-top: 20px;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 25px;
+}
+
+nav ul li a {
+    color: white;
+    font-size: 1.5em;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ffcc00;
+    transform: translateY(-5px);
+    text-decoration: underline;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff4500, #ff6347, #ffcc00);
+    color: white;
+    text-align: center;
+    padding: 50px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+.hero h2 {
+    font-size: 4.5em;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-shadow: 4px 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.hero .btn {
+    background: #ff6347;
+    padding: 20px 40px;
+    color: white;
+    text-decoration: none;
+    font-size: 1.8em;
+    border-radius: 50px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.hero .btn:hover {
+    background: #ff4500;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    transform: translateY(-5px);
+}
+
+/* Menu Section */
+.menu {
+    padding: 60px 20px;
+    background: #ffffff;
+    text-align: center;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+.menu h2 {
+    font-size: 3em;
+    color: #ff6347;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.food-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    padding: 20px 0;
+}
+
+.food-item {
+    background: #fff;
+    border-radius: 15px;
+    padding: 25px;
+    width: 280px;
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+    margin-bottom: 40px;
+    transform: perspective(300px) rotateX(0deg);
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+
+.food-item:hover {
+    transform: translateY(-10px) rotateX(10deg);
+}
+
+.food-item img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.food-item img:hover {
+    transform: scale(1.1);
+}
+
+.food-item h3 {
+    font-size: 1.7em;
+    color: #ff6347;
+    margin: 15px 0;
+    font-weight: 600;
+}
+
+.food-item p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.food-item .order-btn {
+    background: #ff6347;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-size: 1.2em;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.food-item .order-btn:hover {
+    background: #ff4500;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+/* Footer Styles */
+footer {
+    background: #222;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+/* Contact Section */
+.contact {
+    text-align: center;
+    padding: 60px 20px;
+    background: #f9f9f9;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.contact h2 {
+    font-size: 2.5em;
+    color: #ff6347;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.contact p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.contact-details {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.contact-details a {
+    color: #ff6347;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.contact-details a:hover {
+    text-decoration: underline;
+    transform: scale(1.1);
+}
+
+/* Contact Form */
+form {
+    max-width: 550px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border: 2px solid #ff6347;
+    border-radius: 5px;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+}
+
+form input:focus, form textarea:focus {
+    border-color: #ff4500;
+    box-shadow: 0 0 8px rgba(255, 69, 0, 0.5);
+}
+
+form button {
+    width: 100%;
+    background: #ff6347;
+    color: white;
+    padding: 15px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+form button:hover {
+    background: #ff4500;
+}
+
+/* Logout Button */
+.logout-btn {
+    background: #ff0000;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    text-transform: uppercase;
+    margin-left: 30px;
+}
+
+.logout-btn:hover {
+    background: #cc0000;
+}
+
+/* Popup Background */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Show Popup */
+.popup.show {
+    display: flex;
+}
+
+/* Popup Content */
+.popup-content {
+    background: #fff;
+    padding: 20px;
+    width: 90%;
+    max-width: 450px;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+        
+/* Profile Icon (Gear) */
+.profile-icon {
+    width: 45px;
+    height: 45px;
+    background: white;
+    color: #ff5733;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    border: 2px solid #ff5733;
+    transition: all 0.3s;
+}
+
+.profile-icon:hover {
+    background: #ff5733;
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Logout Dropdown */
+.logout-dropdown {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.logout-dropdown.show {
+    display: block;
+}
+
+#logoutButton {
+    background: #ff4500;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+}
+
+#logoutButton:hover {
+    background: #e03e00;
+}
+
+#authButtons {
+    display: flex; /* Default: Show when not logged in */
+}
+
+#profileContainer {
+    display: none; /* Default: Hide profile icon */
+}
